@@ -48,14 +48,13 @@ class HomeFragment : Fragment(){
 
         binding.drawFixtureButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_drawFixtureFragment)
-//            Log.d("homefragment", "viewModelTeamList: "+viewModel.teamList)
 
-            val fixture = ListMatches(viewModel.teamList)
+            val fixture = listMatches(viewModel.teamList)
             for(week in fixture){
                 val weekId = fixture.indexOf(week)
                 viewModel.addWeek(Week(weekId,week))
             }
-            val secondHalfFixture = ListSecondHalf(viewModel.teamList)
+            val secondHalfFixture = listSecondHalf(viewModel.teamList)
             for(week in secondHalfFixture){
                 val weekId = secondHalfFixture.indexOf(week)+fixture.size
                 viewModel.addWeek(Week(weekId,week))

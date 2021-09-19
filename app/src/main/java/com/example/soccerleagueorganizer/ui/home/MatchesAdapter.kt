@@ -8,7 +8,7 @@ import com.example.soccerleagueorganizer.data.entity.Match
 import com.example.soccerleagueorganizer.databinding.MatchCardBinding
 
 class MatchesAdapter(
-    val matches: List<Match>
+    private val matches: List<Match>
 ): RecyclerView.Adapter<MatchesAdapter.MatchesViewHolder>(){
 
     inner class MatchesViewHolder(val binding: MatchCardBinding): RecyclerView.ViewHolder(binding.root)
