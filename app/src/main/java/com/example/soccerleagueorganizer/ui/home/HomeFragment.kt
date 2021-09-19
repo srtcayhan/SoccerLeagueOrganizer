@@ -1,6 +1,7 @@
 package com.example.soccerleagueorganizer.ui.home
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,6 +24,12 @@ class HomeFragment : Fragment(){
     private val viewModel: HomeViewModel by viewModels()
 
     private var teamsAdapter: TeamsListAdapter = TeamsListAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        exitTransition = inflater.inflateTransition(R.transition.fade)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
