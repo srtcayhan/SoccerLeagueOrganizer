@@ -9,7 +9,7 @@ import com.example.soccerleagueorganizer.databinding.ItemViewPagerBinding
 import com.example.soccerleagueorganizer.utils.room.Week
 
 class ViewPagerAdapter(
-    val weeks: List<Week>
+    private val weeks: List<Week>
     ) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
 
     inner class ViewPagerViewHolder(val binding:ItemViewPagerBinding): RecyclerView.ViewHolder(binding.root)
