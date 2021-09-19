@@ -1,10 +1,10 @@
 package com.example.soccerleagueorganizer.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.soccerleagueorganizer.R
 import com.example.soccerleagueorganizer.data.entity.Team
 import com.example.soccerleagueorganizer.databinding.TeamCardBinding
 
@@ -28,15 +28,11 @@ class TeamsListAdapter : RecyclerView.Adapter<TeamsListAdapter.TeamsViewHolder>(
         holder.binding.teamName.text = team.name
         holder.binding.venueCity.text = team.venue_city
 
-//        holder.binding.mealItemCardView.setOnClickListener {
-//
-//            listener?.onClick(meal.mealId)
-//        }
-
     }
 
     override fun getItemCount(): Int = teamsList.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setTeamsList(teams: List<Team>) {
             teamsList = teams
             notifyDataSetChanged()

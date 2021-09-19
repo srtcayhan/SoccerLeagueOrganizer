@@ -8,17 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.soccerleagueorganizer.R
 import com.example.soccerleagueorganizer.data.entity.Team
 import com.example.soccerleagueorganizer.databinding.FragmentHomeBinding
 import com.example.soccerleagueorganizer.utils.Resource
-import com.yuyakaido.android.cardstackview.CardStackListener
-import com.yuyakaido.android.cardstackview.Direction
+import com.example.soccerleagueorganizer.utils.room.Week
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(){
@@ -45,6 +41,18 @@ class HomeFragment : Fragment(){
 
         binding.drawFixtureButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_drawFixtureFragment)
+//            Log.d("homefragment", "viewModelTeamList: "+viewModel.teamList)
+
+            val fixture = ListMatches(viewModel.teamList)
+            for(week in fixture){
+                val weekId = fixture.indexOf(week)
+                viewModel.addWeek(Week(weekId,week))
+            }
+            val secondHalfFixture = ListSecondHalf(viewModel.teamList)
+            for(week in secondHalfFixture){
+                val weekId = secondHalfFixture.indexOf(week)+fixture.size
+                viewModel.addWeek(Week(weekId,week))
+            }
         }
     }
 
@@ -60,7 +68,7 @@ class HomeFragment : Fragment(){
                     Resource.Status.SUCCESS -> {
                         viewModel.teamList = response.data!!
                         setTeams(viewModel.teamList)
-                        Log.d("Home", "teamListSize: " + viewModel.teamList?.size)
+                        Log.d("Home", "teamListSize: " + viewModel.teamList.size)
                     }
                     Resource.Status.ERROR -> {
                         Log.d("Home", "error: "+response.toString())
